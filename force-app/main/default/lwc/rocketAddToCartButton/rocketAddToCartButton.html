@@ -1,0 +1,29 @@
+<template>
+    <c-rocket-toast></c-rocket-toast>
+    <p style="display:none">{label.quantitySelectedMessage} {receivedMessage}</p>
+    <template lwc:if={loading}>
+        <lightning-spinner
+            variant="brand"
+            size="large"
+            alternative-text={label.loadingLabel}>
+        </lightning-spinner>
+    </template>
+    <h3 lwc:if={displayQuantityRulesText} class="slds-text-heading--small slds-p-vertical_none slds-p-horizontal_none">{quantityRuleString}</h3>
+    <div class="add-to-cart-button commerce_product_details-addtocartbutton_addtocartbutton-host">
+        <button class={buttonClass} onclick={handleAddToCart} disabled={buttonDisabled}>{buttonDisplayText}</button>
+    </div>
+    <span lwc:if={showErrorMessage}>{errorMessage}</span>
+
+    <c-rocket-modal-unexposed
+        show-modal={showModal}
+        onclosemodal={handleClose}>
+
+        <div slot="headerRegion" class="slds-grid slds-grid_vertical-align-center">
+            <h2 class="slds-text-heading_medium slds-hyphenate slds-align_absolute-center">{label.itemAddedTitle}</h2>
+        </div>
+        <div slot="footerRegion" class="slds-grid slds-grid_vertical-align-center slds-align_absolute-center slds-p-around_medium">
+            <button class="slds-button slds-button_neutral slds-button_stretch" aria-label="Cancel" onclick={handleClose}>{label.continueLabel}</button>
+            <button class="slds-button slds-button_brand slds-button_stretch" onclick={handleNavCart}>{label.viewCartLabel}</button>
+        </div>
+    </c-rocket-modal-unexposed>
+</template>

@@ -1,0 +1,118 @@
+<apex:page Controller="Rocket_Event_Logger" showHeader="false" action="{!searchByQueryUserId}">
+   <head>
+        <apex:stylesheet value="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css"  />
+        <apex:stylesheet value="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css"  />        
+        <apex:includeScript value="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" />
+        <apex:includeScript value="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js" />
+        <apex:includeScript value="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.js" />        
+   </head>
+   <body>
+        <script type="text/javascript">
+            jQuery(function($) {
+                $("[id*='datepicker']").datetimepicker({showSecond: true, timeFormat: "h:mm:ss TT"});
+            });               
+        </script>   
+        <h1 style="align: center; font-size:x-large">Rocket Log Details</h1>
+        <apex:form >
+            <apex:pageBlock >
+                <apex:outputpanel id="tbl">    
+                    <table>
+                        <tr>
+                            <td><strong><apex:outputText value="Select Filters"/></strong></td>
+                            <td>&nbsp;</td>
+                        </tr> 
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>                   
+                        <tr>
+                            <td><apex:outputText value="User Id : "/></td><td><apex:inputText label="User Id : " value="{!qUserId}" disabled="{!bConfirmState == true}"/></td>
+                        </tr>
+                        <tr>
+                            <td><apex:outputText value="Log Level : "/></td>
+                            <td><apex:selectList label="Log Level : " value="{!selectedLogLevel}" multiselect="false" size="1" disabled="{!bConfirmState == true}">
+                                 <apex:selectOptions value="{!logLevels}" id="field"/>
+                                 <apex:actionSupport event="onchange" action="{!setLogLevelValue}"/>
+                                </apex:selectList>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><apex:outputText value="Debug Message Contains : "/></td><td><apex:inputText label="Debug Message Contains : " value="{!qDebugMessageContains}" disabled="{!bConfirmState == true}"/></td>
+                        </tr>  
+                        <tr>
+                            <td><apex:outputText value="Class Contains : "/></td><td><apex:inputText label="Class Contains : " value="{!qClassContains}" disabled="{!bConfirmState == true}"/></td>
+                        </tr>                                  
+                        <tr>
+                            <td><apex:outputText value="Method Contains : "/></td><td><apex:inputText label="Method Contains : " value="{!qMethodContains}" disabled="{!bConfirmState == true}"/></td>
+                        </tr>                                              
+                        <tr>
+                            <td><apex:outputText value="Exception Type Contains : "/></td><td><apex:inputText label="Exception Type Contains : " value="{!qExceptionTypeContains}" disabled="{!bConfirmState == true}"/></td>
+                        </tr>
+                        <tr>
+                            <td><apex:outputText value="Exception Contains : "/></td><td><apex:inputText label="Exception Contains : " value="{!qExceptionContains}" disabled="{!bConfirmState == true}"/></td>
+                        </tr>
+                        <tr>
+                            <td><apex:outputText value="Request Map Contains : "/></td><td><apex:inputText label="Request Map Contains : " value="{!qRequestMapContains}" disabled="{!bConfirmState == true}"/></td>
+                        </tr>   
+                        <tr>
+                            <td><apex:outputText value="Response Map Contains : "/></td><td><apex:inputText label="Response Map Contains : " value="{!qResponseMapContains}" disabled="{!bConfirmState == true}"/></td>
+                        </tr>  
+                        <tr>
+                            <td><apex:outputText value="Timestamp In: "/></td>
+                            <td><apex:selectList label="Timestamp In: " value="{!selectedTimestamp}" multiselect="false" size="1" disabled="{!bConfirmState == true}">
+                                 <apex:selectOptions value="{!timestampOptions}" id="ts"/>
+                                 <apex:actionSupport event="onchange" action="{!setTimestampValue}"/>
+                                </apex:selectList>
+                            </td>
+                        </tr>  
+                        <tr>
+                            <td><apex:outputText rendered="{!qTimestampContains == '--CHOOSE SPECIFIC--'}" value="Timestamp Start: "/></td>
+                            <td>
+                                <apex:inputText rendered="{!qTimestampContains == '--CHOOSE SPECIFIC--'}" id="datepicker_start"  label="Choose Start Date and Time : " value="{!qTimestampStart}" disabled="{!bConfirmState == true}" />
+                            </td>
+                        </tr> 
+                        <tr>
+                            <td><apex:outputText rendered="{!qTimestampContains == '--CHOOSE SPECIFIC--'}" value="Timestamp End: "/></td>
+                            <td>
+                                <apex:inputText rendered="{!qTimestampContains == '--CHOOSE SPECIFIC--'}" id="datepicker_end"  label="Choose End Date and Time : " value="{!qTimestampEnd}" disabled="{!bConfirmState == true}" />
+                            </td>
+                        </tr>                                                                
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>             
+                        <tr>
+                            <td><strong><apex:outputText value="* Filters are 'Anded'"/></strong></td>
+                            <td><apex:commandButton value="Search Rocket Logs" action="{!searchWithFilters}" reRender="pb" disabled="{!bConfirmState == true}"/></td>
+                        </tr>                                                                                  
+                    </table>
+                </apex:outputpanel>   
+                <apex:outputpanel id="pb">
+                    <apex:commandButton rendered="{!bShowDeleteButton == true}" value="Delete Log Entries" action="{!confirmDelete}" reRender="tbl,pb" />                    
+                    <p>                     
+                        <apex:outputText rendered="{!bConfirmState == true}" value="      **********  Really Delete {!rows} Records?  **********     " />
+                        <apex:commandButton rendered="{!bConfirmState == true}" value="Yes" action="{!deleteLogEntries}" reRender="tbl,pb" />
+                        <apex:commandButton rendered="{!bConfirmState == true}" value="Cancel" action="{!cancelDelete}"  reRender="tbl,pb" />        
+                    </p>
+                    <apex:outputText rendered="{!error != null}" value="Error: {!error}"/><br/>                    
+                    <apex:outputText rendered="{!rows != null}" value="Found {!rows} Records"/><br/>        
+                    <apex:outputText rendered="{!rows == null}" value="Perform a search"/><br/>                    
+                    <apex:pageBlockSection >
+                        <apex:pageBlockTable rendered="{!logEntries != null}" value="{!logEntries}" var="e">
+                            <apex:column value="{!e.User_Id__c}"/>
+                            <apex:column value="{!e.LogLevel__c}"/>
+                            <apex:column value="{!e.DebugMessage__c}"/>
+                            <apex:column value="{!e.Class__c}"/>                
+                            <apex:column value="{!e.Method__c}"/>                
+                            <apex:column value="{!e.ExceptionType__c}"/>
+                            <apex:column value="{!e.ExceptionMessage__c}"/>
+                            <apex:column value="{!e.RequestMap__c}"/>                
+                            <apex:column value="{!e.ResponseMap__c}"/>
+                            <apex:column value="{!e.Timestamp__c}"/>                
+                        </apex:pageBlockTable>
+                    </apex:pageBlockSection>        
+                </apex:outputpanel>
+            </apex:pageBlock>
+        </apex:form>
+   </body>        
+</apex:page>

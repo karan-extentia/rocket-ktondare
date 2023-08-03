@@ -1,0 +1,26 @@
+<template>
+    <div lwc:if={showModal}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open" aria-modal="true">
+            <div class="slds-modal__container">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={handleClose}>
+                <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                    <use xlink:href={iconUrl}></use>
+                </svg>
+                <span class="slds-assistive-text">{label.close}</span>
+                </button>
+                <div>
+                <div class={headerRegionClassNames}>
+                    <slot name="headerRegion"></slot>
+                </div>
+                <div class={contentRegionClassNames}>
+                    <slot name="contentRegion"></slot>
+                </div>
+                <div class={footerRegionClassNames}>
+                    <slot name="footerRegion"></slot>
+                </div>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </div>
+</template>

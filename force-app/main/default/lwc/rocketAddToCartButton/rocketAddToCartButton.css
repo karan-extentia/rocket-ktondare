@@ -1,0 +1,18 @@
+.addtocart-button {
+    background-color: var(--addtocart-button-background-color, var(--dxp-s-button-color));
+    color: var(--addtocart-button-color-text, var(--dxp-s-button-color-contrast));
+    border-radius: var(--addtocart-button-border-radius, var(--dxp-s-button-radius-border));
+    border-color: var(--addtocart-button-border-color, var(--dxp-s-button-color));
+    height: 2.5rem;
+}
+
+.addtocart-button:hover {
+    background-color: var(--addtocart-button-background-color-hover);
+    color: var(--addtocart-button-color-text-hover);
+}
+
+.addtocart-button:disabled {
+    background-color: var(--dxp-g-neutral-1);
+    border-color: var(--dxp-g-neutral-1);
+    color: var(--dxp-s-button-color-contrast);
+  }

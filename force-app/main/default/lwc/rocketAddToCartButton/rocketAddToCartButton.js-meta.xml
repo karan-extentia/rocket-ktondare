@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata" fqn="oneRegionLayout">
+    <apiVersion>57.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Rocket Add To Cart Button</masterLabel>
+    <description>This button will access the quantity from the Rocket Quantity selector component and add the current binded product to the cart</description>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property 
+                name="buttonText" 
+                type="String" 
+                label="Button Text" 
+                default="Add To Cart"
+            />
+            <property 
+                name="errorMessage" 
+                type="String" 
+                label="Error Message" 
+                default="Add To Cart Broke"
+            />
+            <property 
+                name="buttonVariant" 
+                type="String" 
+                label="Variant" 
+                default="Primary" 
+                datasource="Primary,Secondary,Tertiary"
+            />
+            <property 
+                name="buttonSize" 
+                type="String" 
+                label="Size" 
+                default="Standard" 
+                datasource="Large,Small,Standard"
+            />
+            <property 
+                name="buttonWidth" 
+                type="String" 
+                label="Width" 
+                default="Default" 
+                datasource="Default,Full Width"
+            />
+            <property 
+                name="buttonAlignment" 
+                type="String" 
+                label="Alignment" 
+                default="Center" 
+                datasource="Left,Center,Right"
+            />
+            <property 
+                name="recordId" 
+                type="String" 
+                label="Record Id" 
+                default="{!Item.id}" 
+                description="Use {!Item.id} when using Data repeater, use {!Product.Details.id} when using directly on a object page"
+            />
+             <property
+                name="preventAddToCart"
+                type="Boolean"
+                label="Prevent Add to Cart"
+                description="Do not allow the user to add item to the cart when inventory is not available"
+            />
+             <property
+                name="inventoryProductAttributeField"
+                type="String"
+                label="Use Product Field for Inventory Availability"
+                default=""
+                description="Use the given Product Field for checking inventory availability instead of callout."
+            />
+             <property
+                name="outOfStockButtonText"
+                type="String"
+                label="Out of Stock Button Text"
+                default="Out of Stock" 
+                description="Button Text for when product is out of stock"
+            />
+            <property 
+                name="buttonTextColor" 
+                type="Color" 
+                default="#FFF" 
+                label="Button Text Color"
+            />
+            <property 
+                name="buttonTextHoverColor" 
+                type="Color" 
+                default="#FFF" 
+                label="Button Text Hover Color"
+            />
+            <property 
+                name="buttonProcessingText" 
+                type="String" 
+                label="Add To Cart Button Processing Text" 
+                default="Adding..."
+            />
+            <property 
+                name="buttonBackgroundColor" 
+                type="Color" 
+                default="#000" 
+                label="Button Background Color"
+            />
+            <property 
+                name="buttonBackgroundHoverColor" 
+                type="Color" 
+                default="rgb(5, 37, 59)" 
+                label="Button Background Hover Color"
+            />
+            <property 
+                name="buttonBorderColor" 
+                type="Color" 
+                default="#000" 
+                label="Button Border Color"
+            />
+            <property 
+                name="buttonBorderRadius" 
+                type="Integer" 
+                label="Button Border Radius in Pixels (0 - 50)" 
+                default="0"
+            />
+            <property 
+                name="minimumValueGuideText" 
+                type="String" 
+                label="Minimum Text" 
+                default="Minimum quantity is {0}"
+            />
+            <property 
+                name="maximumValueGuideText" 
+                type="String" 
+                label="Maximum Text" 
+                default="Maximum quantity is {0}"
+            />
+            <property 
+                name="incrementValueGuideText" 
+                type="String" 
+                label="Increment Text" 
+                default="Increment quantity is {0}"
+            />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

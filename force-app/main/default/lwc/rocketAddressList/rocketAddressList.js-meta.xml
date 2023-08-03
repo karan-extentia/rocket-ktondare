@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Rocket Address List</masterLabel>
+    <description>Rocket Address List</description>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+        <!-- Address  List Settings -->
+            <property
+                name="previewAccountId"
+                type="String"
+                label="Preview Account ID"
+                description="The Account records used to configure and preview addresses."
+            />
+            <property
+                name="showAddressType"
+                type="String"
+                label="Show Address Type"
+                description="When you select Show All Types, ensure that Show all Addresses types is selected on Address Form page."
+                datasource="Shipping,Shipping and billing"
+                default="Shipping"
+            />
+            <property
+                name="shippingTabLabel"
+                type="String"
+                label="Shipping Tab Label"
+                default="Shipping"
+            />
+            <property
+                name="billingTabLabel"
+                type="String"
+                label="Billing Tab Label"
+                default="Billing"
+            />
+            <property
+                name="cardSpacing"
+                type="String"
+                label="Card Spacing"
+                datasource="Small,None,Medium,Large"
+                default="Small"
+            />
+            <property
+                name="addressesPerPage"
+                type="String"
+                label="Addresses per page"
+                datasource="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"
+                default="10"
+            /> 
+            <property
+                name="noAddressMessageTitle"
+                type="String"
+                label="No Address Message Title"
+                default="No Address Yet"
+            />
+            <property
+                name="noAddressMessageText"
+                type="String"
+                label="No Address Message Text"
+                default="You don't have any address yet"
+            />
+            <property 
+                name="showCheckoutShippingAddress" 
+                type="Boolean" 
+                label="Show Shipping Address - Checkout view" 
+                default="False"
+            />
+
+            <property 
+                name="showDefaultAddressOnly" 
+                type="Boolean" 
+                label="Show the customer's default address only" 
+                default="False"
+            />
+
+            <!-- Default Badge -->
+            <property
+                name="defaultBadgeColor"
+                type="Color"
+                label="Default Badge Color"
+                default="rgb(201, 201, 201)"
+            />
+            <property
+                name="defaultBadgeBorderRadius"
+                type="Integer"
+                label="Default Badge Border Radius (0px - 100px)"
+                default="50" 
+            />
+            <property
+                name="defaultBadgeLabel"
+                type="String"
+                label="Default Badge Label"
+                default="Default"
+            />
+
+            <!-- Address Footer -->
+            <property
+                name="editButtonLabel"
+                type="String"
+                label="Edit Button Label"
+                default="Edit"
+            />
+            <property
+                name="deleteButtonLabel"
+                type="String"
+                label="Delete Button Label"
+                default="Delete"
+            />
+
+             <!-- New Address Button -->
+            <property
+                name="showNewAddressLabel"
+                type="String"
+                label="New Address Button Label"
+                default="New Address"
+            />
+
+            <!-- Show More Button -->
+            <property
+                name="showMoreLabel"
+                type="String"
+                label="Label"
+                default="Show More"
+            />
+            <property
+                name="showMoreButtonStyle"
+                type="String"
+                label="Button Style"
+                datasource="Secondary,Primary,Tertiary"
+                default="Secondary"
+            />
+            <property
+                name="showMoreButtonSize"
+                type="String"
+                label="Size"
+                datasource="Standard,Small,Large "
+                default="Standard"
+            />
+            <property
+                name="showMoreButtonWidth"
+                type="String"
+                label="Width"
+                datasource="Default,Full Width"
+                default="Default"
+            />
+            <property
+                name="showMoreButtonAlign"
+                type="String"
+                label="Align"
+                datasource="Left,Center,Right"
+                default="Center"
+            />
+            
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

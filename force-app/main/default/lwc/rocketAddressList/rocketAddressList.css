@@ -1,0 +1,121 @@
+:host {
+    --sds-c-card-heading-font-weight: 500px;
+    --sds-c-card-body-spacing-inline-start: 20px;
+    --slds-c-icon-color-foreground-default: #fff;
+}
+
+/* card checkout view */
+.card-address-height {
+    height: 100%;
+}
+
+.card-address-fit {
+    height: fit-content;
+}
+
+/* card list view */
+.address-card-style-class {
+    height: 100%;
+    border-radius: 0;
+}
+
+.address-card-body {
+    min-height: 75%;
+}
+
+.address-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(23rem, 1fr));
+    grid-auto-rows: minmax(max-content, 1fr);
+}
+
+.address-grid-gap-small {
+    grid-gap: var(--dxp-g-spacing-small);
+    padding: var(--dxp-g-spacing-small);
+}
+
+.address-grid-gap-medium {
+    grid-gap: var(--dxp-g-spacing-medium);
+    padding: var(--dxp-g-spacing-medium);
+}
+
+.address-grid-gap-large {
+    grid-gap: var(--dxp-g-spacing-large);
+    padding: var(--dxp-g-spacing-large);
+}
+
+/* default badge */
+
+.address-default-badge,
+.address-default-badge-checkout{
+    background-color: var(--defaultBadgeColor);
+    border-radius: var(--defaultBadgeBorderRadius);
+}
+
+.address-default-badge {
+    max-width: 25%;
+}
+
+/* name */
+
+.name-decoration {
+    font-weight: var(--dxp-c-strong-text-weight, 700);
+    font-style: normal;
+    text-decoration: none;
+}
+
+/* card footer */
+
+.address-footer-style {
+    width: 100%;
+    display: inline-block;
+    margin-top: var(--dxp-g-spacing-xxsmall);
+    text-align: left;
+}
+
+.address-footer-style button:nth-child(n) {
+    text-decoration-line: underline;
+}
+
+.address-footer-button-style {
+    max-width: 40%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.address-footer-style button:nth-child(2) {
+    margin-left: var(--dxp-g-spacing-small);
+}
+
+/* footer for list buttons */
+
+.show-more-button_right {
+    margin: auto 0 auto auto;
+}
+
+.show-more-button_left {
+    margin: auto auto auto 0;
+}
+
+/* footer for shipping list - checkout view */
+
+.address-footer-shipping-style {
+    row-gap: var(--lwc-spacingVerticalXxSmall, 0.25rem);
+    column-gap: var(--lwc-spacingXxSmall, 0.25rem);
+    max-width: 75em;
+}
+
+.address-footer-shipping-style .slds-button + .slds-button {
+    margin-left: 0;
+}
+
+/* show/hide edit address on selection */
+.edit-address-selected {
+    display: none;
+}
+
+.slds-visual-picker input:checked ~ * .edit-address-selected {
+    display: block;
+}
